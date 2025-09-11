@@ -150,7 +150,7 @@ Identify the bug(s) in the RTL code and fix them.
 
 
 
-The bug fixed RTL `/code/rtl/rc5_enc_16bit.sv` is given in rc5_encrption_1 git branch.
+The bug fixed RTL `/code/rtl/rc5_enc_16bit.sv` is given in git branch `rc5_encryption_1`.
  
 
 
