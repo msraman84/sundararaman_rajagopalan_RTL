@@ -6,14 +6,14 @@ This is a repo containing RTL implementation of RC5 encryption algorithm. My rol
 
 
 
-##Input to LLM
+## Input to LLM
 
 
 
 There is a systemverilog RTL `rc5\_enc\_16bit.sv` in the /code/rtl directory of the git main branch. This RTL implements the RC5 encryption algorithm by taking 16-bit plain-text input 'p' to produce the 16-bit ciphertext output 'c'. The detailed functionality of this block cipher algorithm has been given in `/code/docs/specification.md` file. While executing the RTL code with the testbench `/code/verif/tb\_rc5\_enc.sv`, the following logs were observed.
 
 
-
+```
 Admin@DESKTOP-9GV21IC MINGW64 /e/Phinity\_labs/Phinity\_labs\_rc5 (main)
 
 $ docker-compose run verif
@@ -123,7 +123,7 @@ Ciphertext is not correct
 /code/verif/tb\_rc5\_enc.sv:62: $finish called at 300 (1s)
 
 &nbsp;                300enc\_start =  1, enc\_p = 00ff enc\_c = 765d enc\_done = 0
-
+```
 
 
 Based on the functionality of RC5 encryption algorithm, the expected and actual outputs are given below:
@@ -146,7 +146,7 @@ Identify the bug(s) in the RTL code and fix them.
 
 
 
-\## Output
+## Output
 
 
 
@@ -155,12 +155,13 @@ The bug fixed RTL `/code/rtl/rc5\_enc\_16bit.sv` is given in rc5\_encrption\_1 g
 
 
 
-\## Testbench
+## Testbench
 
 
 
 The testbench used for identification of bugs and their correction is given in `/code/verif/tb\_enc\_rc5.sv` file. The logs of the testbench after fixing the RTL bugs are given below.
 
+```
 Admin@DESKTOP-9GV21IC MINGW64 /e/Phinity\_labs/Phinity\_labs\_rc5 (rc5\_encryption\_1)
 
 $ docker-compose run verif
@@ -270,12 +271,6 @@ Ciphertext is correct
 /code/verif/tb\_rc5\_enc.sv:62: $finish called at 300 (1s)
 
 &nbsp;                300enc\_start =  1, enc\_p = 00ff enc\_c = 9665 enc\_done = 0
-
-
-
-
-
-
-
+```
 
 
