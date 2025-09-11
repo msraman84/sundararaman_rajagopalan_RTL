@@ -6,7 +6,7 @@ This is a repo containing RTL implementation of RC5 encryption algorithm. My rol
 
 
 
-\## Input to LLM
+\##Input to LLM
 
 
 
@@ -128,17 +128,15 @@ Ciphertext is not correct
 
 Based on the functionality of RC5 encryption algorithm, the expected and actual outputs are given below:
 
-plaintext(p)   |  Expected ciphertext (c)  | Actual ciphertext (c)
+| Plaintext (p) | Expected Ciphertext (c) | Actual Ciphertext (c) |
 
-------------------------------------------------------------------
+|---------------|--------------------------|------------------------|
 
-FFFF           |   0703                    | E773
+| FFFF          | 0703                     | E773                   |
 
-FF00           |   0E86                    | 0F8E
+| FF00          | 0E86                     | 0F8E                   |
 
-00FF           |   9665                    | 765D
-
-------------------------------------------------------------------
+| 00FF          | 9665                     | 765D                   |
 
 
 
