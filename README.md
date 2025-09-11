@@ -279,10 +279,10 @@ Two bugs were identified while ananlyzing the given buggy RTL with the specifica
 
 Line number 25:
 
-		p_tmp[15:8] <= (p_tmp[15:8] - s[0]) % 9'h100;
+`p_tmp[15:8] <= (p_tmp[15:8] - s[0]) % 9'h100;`
 
 Line number 30:
 
-p_tmp[15:8] <= ((((p_tmp[15:8] & p_tmp[7:0]) << (p_tmp[7:0]%8)) | ((p_tmp[15:8] ^ p_tmp[7:0]) >> (8 - (p_tmp[7:0]%8)))) + s[2]) % 9'h100;
+`p_tmp[15:8] <= ((((p_tmp[15:8] & p_tmp[7:0]) << (p_tmp[7:0]%8)) | ((p_tmp[15:8] ^ p_tmp[7:0]) >> (8 - (p_tmp[7:0]%8)))) + s[2]) % 9'h100;`
 
 In the former case, instead of addition operation, subtraction was carried out. In the later, bitwise AND operation was done instead of XOR logic. Because of these two logic deviations, the testbench logs showed as `ciphertext not correct`. After resolving these logic mistakes, the modified RTL matches with the specification.
