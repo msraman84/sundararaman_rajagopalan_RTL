@@ -10,7 +10,7 @@ This is a repo containing RTL implementation of RC5 encryption algorithm. My rol
 
 
 
-There is a systemverilog RTL `rc5\_enc\_16bit.sv` in the /code/rtl directory of the git main branch. This RTL implements the RC5 encryption algorithm by taking 16-bit plain-text input 'p' to produce the 16-bit ciphertext output 'c'. The detailed functionality of this block cipher algorithm has been given in `/code/docs/specification.md` file. While executing the RTL code with the testbench `/code/verif/tb_rc5_enc.sv`, the following logs were observed.
+There is a systemverilog RTL `rc5_enc_16bit.sv` in the `/code/rtl` directory of the git main branch. This RTL implements the RC5 encryption algorithm by taking 16-bit plain-text input 'p' to produce the 16-bit ciphertext output 'c'. The detailed functionality of this block cipher algorithm has been given in `/code/docs/specification.md` file. While executing the RTL code with the testbench `/code/verif/tb_rc5_enc.sv`, the following logs were observed.
 
 
 ```
