@@ -10,7 +10,7 @@ Cryptography is the science of securing multimedia objects such as text, images,
 
 ### Inputs:
 •	**clock (1-bit)** : A single-bit input clock that drives the Finite State Machine executing the encryption algorithm. The clock typically has a 50:50 duty cycle.\
-•	**reset (1-bit)**: A control signal that resets the internal states of the encryption system. Synchronous reset has been used in this encryption module\ 
+•	**reset (1-bit)**: A control signal that resets the internal states of the encryption system. Synchronous reset has been used in this encryption module.\ 
 •	**enc_start (1-bit)**: This is a 1-bit control signal which initiates the encryption process when it holds a logic HIGH\
 •	**p (2w-bits)[15:0]** : This is the plain text input for RC5 encryption, generally available in data widths of 16-bit, 32-bit, 64-bit, or 128-bits. Plaintext is processed in two segments of 'w' bits each, aligning with the algorithm’s requirements. For this implementation w = 8\
 
