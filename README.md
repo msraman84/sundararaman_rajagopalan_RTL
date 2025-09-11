@@ -1,4 +1,4 @@
-# RC5\_encryption\_RTL
+# RC5_encryption_RTL
 
 
 
@@ -10,7 +10,7 @@ This is a repo containing RTL implementation of RC5 encryption algorithm. My rol
 
 
 
-There is a systemverilog RTL `rc5\_enc\_16bit.sv` in the /code/rtl directory of the git main branch. This RTL implements the RC5 encryption algorithm by taking 16-bit plain-text input 'p' to produce the 16-bit ciphertext output 'c'. The detailed functionality of this block cipher algorithm has been given in `/code/docs/specification.md` file. While executing the RTL code with the testbench `/code/verif/tb\_rc5\_enc.sv`, the following logs were observed.
+There is a systemverilog RTL `rc5\_enc\_16bit.sv` in the /code/rtl directory of the git main branch. This RTL implements the RC5 encryption algorithm by taking 16-bit plain-text input 'p' to produce the 16-bit ciphertext output 'c'. The detailed functionality of this block cipher algorithm has been given in `/code/docs/specification.md` file. While executing the RTL code with the testbench `/code/verif/tb_rc5_enc.sv`, the following logs were observed.
 
 
 ```
@@ -24,7 +24,7 @@ Executing...
 
 VCD info: dumpfile dump.vcd opened for output.
 
-VCD warning: /code/verif/tb\_rc5\_enc.sv:42: $dumpfile called after $dumpvars started,
+VCD warning: /code/verif/tb_rc5_enc.sv:42: $dumpfile called after $dumpvars started,
 
 &nbsp;                                          using existing file (dump.vcd).
 
@@ -150,7 +150,7 @@ Identify the bug(s) in the RTL code and fix them.
 
 
 
-The bug fixed RTL `/code/rtl/rc5\_enc\_16bit.sv` is given in rc5\_encrption\_1 git branch.
+The bug fixed RTL `/code/rtl/rc5_enc_16bit.sv` is given in rc5_encrption_1 git branch.
  
 
 
@@ -159,10 +159,10 @@ The bug fixed RTL `/code/rtl/rc5\_enc\_16bit.sv` is given in rc5\_encrption\_1 g
 
 
 
-The testbench used for identification of bugs and their correction is given in `/code/verif/tb\_enc\_rc5.sv` file. The logs of the testbench after fixing the RTL bugs are given below.
+The testbench used for identification of bugs and their correction is given in `/code/verif/tb_enc_rc5.sv` file. The logs of the testbench after fixing the RTL bugs are given below.
 
 ```
-Admin@DESKTOP-9GV21IC MINGW64 /e/Phinity\_labs/Phinity\_labs\_rc5 (rc5\_encryption\_1)
+Admin@DESKTOP-9GV21IC MINGW64 /e/Phinity\_labs/Phinity\_labs\_rc5 (rc5_encryption_1)
 
 $ docker-compose run verif
 
@@ -172,7 +172,7 @@ Executing...
 
 VCD info: dumpfile dump.vcd opened for output.
 
-VCD warning: /code/verif/tb\_rc5\_enc.sv:42: $dumpfile called after $dumpvars started,
+VCD warning: /code/verif/tb_rc5_enc.sv:42: $dumpfile called after $dumpvars started,
 
 &nbsp;                                          using existing file (dump.vcd).
 
@@ -273,4 +273,16 @@ Ciphertext is correct
 &nbsp;                300enc\_start =  1, enc\_p = 00ff enc\_c = 9665 enc\_done = 0
 ```
 
+## Reasoning
 
+Two bugs were identified while ananlyzing the given buggy RTL with the specification. The bugs were present in the following lines of the RTL code.
+
+Line number 25:
+
+		p_tmp[15:8] <= (p_tmp[15:8] - s[0]) % 9'h100;
+
+Line number 30:
+
+p_tmp[15:8] <= ((((p_tmp[15:8] & p_tmp[7:0]) << (p_tmp[7:0]%8)) | ((p_tmp[15:8] ^ p_tmp[7:0]) >> (8 - (p_tmp[7:0]%8)))) + s[2]) % 9'h100;
+
+In the former case, instead of addition operation, subtraction was carried out. In the later, bitwise AND operation was done instead of XOR logic. Because of these two logic deviations, the testbench logs showed as `ciphertext not correct`. After resolving these logic mistakes, the modified RTL matches with the specification.
