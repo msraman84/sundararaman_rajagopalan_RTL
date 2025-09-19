@@ -15,19 +15,19 @@ Cryptography is the science of securing multimedia objects such as text, images,
 
 ### Inputs:
 •	**clock (1-bit)** : A single-bit input clock that drives the Finite State Machine executing the encryption algorithm. The clock typically has a 50:50 duty cycle.\
-•	**reset (1-bit)**: A control signal that resets the internal states of the encryption system. Synchronous reset has been used in this encryption module\ 
+•	**reset (1-bit)**: A control signal that resets the internal states of the encryption system. Synchronous reset has been used in this encryption module\
 •	**enc_start (1-bit)**: This is a 1-bit control signal which initiates the encryption process when it holds a logic HIGH\
 •	**p_in (w-bits)[w-1:0]** : This is the plain text input for RC5 encryption, generally available in data widths of 16-bit, 32-bit, 64-bit, or 128-bits. Plaintext is processed in two segments of 'w' bits each, aligning with the algorithm’s requirements. For this implementation w = 8\
 •	**dec_start (1-bit)**: This is a 1-bit control signal which initiates the decryption process when it holds a logic HIGH\
 •	**c_in (w-bits)[w-1:0]** : This is the cipher text input for RC5 decryption, generally available in data widths of 16-bit, 32-bit, 64-bit, or 128-bits. Ciphertext is processed in two segments of 'w' bits each, aligning with the algorithm’s requirements. For this implementation w = 8\
 •	**lfsr_seed_enc (8-bits)**: This is an 8-bit seed to be applied to LFSR for the generation of 8-bit keys to be used as S-box keys for encryption process\
-•	**lfsr_seed_dec (8-bits)**: This is an 8-bit seed to be applied to LFSR for the generation of 8-bit keys to be used as S-box keys for decryption process\
+•	**lfsr_seed_dec (8-bits)**: This is an 8-bit seed to be applied to LFSR for the generation of 8-bit keys to be used as S-box keys for decryption process
 
 ### Output:
 •	**c_out (w-bits) [w-1:0]**: The output from the RC5 encryption algorithm. Like plaintext, ciphertext typically matches the input data width 'w'. When not in reset mode, the ciphertext is generated from the plaintext after a series of specific logical and arithmetic operations, dependent on the number of rounds 'r'.\
-•	**p_out (w-bits) [w-1:0]** : The result of the RC5 decryption process, typically available in data widths matching the ciphertext. When not in reset mode, the plaintext is reconstituted from the ciphertext following a sequence of specified logical and arithmetic operations, contingent upon the number of decryption rounds 'r'.
-•   **enc_done (1-bit)**: This output marks the end of encryption and indicates the presence of stable cipher text output 
-•   **dec_done (1-bit)**: This output marks the end of decryption and indicates the presence of stable plain text output 
+•	**p_out (w-bits) [w-1:0]** : The result of the RC5 decryption process, typically available in data widths matching the ciphertext. When not in reset mode, the plaintext is reconstituted from the ciphertext following a sequence of specified logical and arithmetic operations, contingent upon the number of decryption rounds 'r'.\
+•   **enc_done (1-bit)**: This output marks the end of encryption and indicates the presence of stable cipher text output\
+•   **dec_done (1-bit)**: This output marks the end of decryption and indicates the presence of stable plain text output
 
 
 ## Functionality
@@ -68,16 +68,11 @@ When the reset is LOW, state_enc should be initialized to 3'b000 and enc_done ha
 
 1. S-box key generation (3'b000)
 
-This state triggers the S-box key generation based on 8-bit LFSR. According to the number of rounds, the number of keys have to be generated. One clock cycle generates one 8-bit key. The LFSR keys should be based on lfsr_key_enc seed input.
+&nbsp;&nbsp;&nbsp;&nbsp;This state triggers the S-box key generation based on 8-bit LFSR. According to the number of rounds, the number of keys have to be generated. One clock cycle generates one 8-bit key. The LFSR keys should be based on lfsr_key_enc seed input.
 
 2. Initial Addition (3'b001)
 
-&nbsp;&nbsp;&nbsp;&nbsp; The S-box keys to be used have to be initialised at the beginning of the design as follows\
-	assign s[0] = 8'h20;\
-	assign s[1] = 8'h10;\
-	assign s[2] = 8'hFF;\
-	assign s[3] = 8'hFF;\
-	The module performs initial modulo additions on the most significant and least significant halves of p_tmp, demonstrating the use of RC5's key mixing in the early stages.
+&nbsp;&nbsp;&nbsp;&nbsp;Using the S-box keys, the module performs initial modulo additions on the most significant and least significant halves of p_tmp, demonstrating the use of RC5's key mixing in the early stages.
 
 3. Computation States (3'b010 and 3'b011)
 
