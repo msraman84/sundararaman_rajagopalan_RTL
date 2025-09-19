@@ -26,15 +26,58 @@ module tb_rc5_enc();
 	end
 
 	initial begin //Initial Reset 
-		rst = 1'b0;enc_start <= 1'b1; enc_p <= 16'hFFFF;//Test 1
+	
+	    //All zeros tests
+		rst = 1'b0;enc_start <= 1'b1; enc_p <= 16'h0000;//Test 1
 		#15 rst <= 1'b1; 
 		#70 rst <= 1'b0;
-		rst = 1'b0;enc_start <= 1'b1; enc_p <= 16'hFF00;//Test 2
+		
+		//All ones tests
+		rst = 1'b0;enc_start <= 1'b1; enc_p <= 16'hFFFF;//Test 2
 		#15 rst <= 1'b1; 
 		#70 rst <= 1'b0;
-		rst = 1'b0;enc_start <= 1'b1; enc_p <= 16'h00FF;//Test 3
+		
+		//Alternate 1s-0s test 101010....
+		rst = 1'b0;enc_start <= 1'b1; enc_p <= 16'hAAAA;//Test 3
 		#15 rst <= 1'b1; 
 		#70 rst <= 1'b0;
+		
+		//Alternate 0s-1s test 010101....
+		rst = 1'b0;enc_start <= 1'b1; enc_p <= 16'h5555;//Test 4
+		#15 rst <= 1'b1; 
+		#70 rst <= 1'b0;
+		
+		//8-bit MSBs zero test
+		rst = 1'b0;enc_start <= 1'b1; enc_p <= 16'h00FF;//Test 5
+		#15 rst <= 1'b1; 
+		#70 rst <= 1'b0;
+		
+		//8-bit LSBs zero test
+		rst = 1'b0;enc_start <= 1'b1; enc_p <= 16'hFF00;//Test 6
+		#15 rst <= 1'b1; 
+		#70 rst <= 1'b0;
+		
+		//Random#1 test
+		rst = 1'b0;enc_start <= 1'b1; enc_p <= $urandom_range(0,65535);//Test 7
+		#15 rst <= 1'b1; 
+		#70 rst <= 1'b0;
+		
+		//Random#2 test
+		rst = 1'b0;enc_start <= 1'b1; enc_p <= $urandom_range(0,65535);//Test 8
+		#15 rst <= 1'b1; 
+		#70 rst <= 1'b0;
+		
+		//Random#3 test
+		rst = 1'b0;enc_start <= 1'b1; enc_p <= $urandom_range(0,65535);//Test 9
+		#15 rst <= 1'b1; 
+		#70 rst <= 1'b0;
+		
+		//Check if new plaintext value is taken only if rst = 0
+		rst = 1'b0;enc_start <= 1'b1; enc_p <= 16'hFFFF;//Test 10
+		#15 rst <= 1'b1; 
+		#30 enc_p <= 16'h0000;
+		#50 rst <= 1'b0;
+
 	end
 
 	initial begin
