@@ -30,15 +30,15 @@ module rc5_enc_16bit(input clock,
 						state <= 3'b001;
 						end
 				3'b001:	begin 
-						p_tmp[15:8] <= ((((p_tmp[15:8] & p_tmp[7:0]) << (p_tmp[7:0]%8)) | ((p_tmp[15:8] & p_tmp[7:0]) >> (8 - (p_tmp[7:0]%8)))) + s[2]) % 9'h100;
+						p_tmp[15:12] <= ((((p_tmp[15:8] ^ p_tmp[7:0]) << (p_tmp[7:0]%4)) | ((p_tmp[15:8] ^ p_tmp[7:0]) >> (4 - (p_tmp[7:0]%4)))) + s[2]) % 9'h10;
 						state <= 3'b010;
 						end
 				3'b010:	begin 
-						p_tmp[7:0] <= ((((p_tmp[7:0] | p_tmp[15:8]) << (p_tmp[15:8]%8)) | ((p_tmp[7:0] | p_tmp[15:8]) >> (8 - (p_tmp[15:8]%8)))) + s[3]) % 9'h100;
+						p_tmp[7:4] <= ((((p_tmp[7:0] ^ p_tmp[15:8]) << (p_tmp[15:8]%4)) | ((p_tmp[7:0] ^ p_tmp[15:8]) >> (4 - (p_tmp[15:8]%4)))) + s[3]) % 9'h10;
 						state <= 3'b011;
 						end
 				3'b011:	begin 
-						c[7:0] <= p_tmp [7:0];
+						c[15:0] <= p_tmp [15:0];
 						enc_done <= 1'b1;
 						end        
 				default:c <= 16'd0;
