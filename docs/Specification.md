@@ -4,21 +4,6 @@
 
 Cryptography is the science of securing multimedia objects such as text, images, audio, and video by scrambling the original data. It includes two primary processes: encryption and decryption. Although cryptography is often applied to text, it can secure any type of digital data. Encryption transforms plaintext into ciphertext, while decryption reverses this process. The aim of encryption is to ensure data privacy, making it challenging for unauthorized users or intruders to access the original information. Cryptographic methods are broadly classified into symmetric and asymmetric ciphers. Symmetric ciphers use the same key for both encryption and decryption, whereas asymmetric ciphers use different keys for each process. Depending on whether the encryption processes data in large blocks or bit by bit, it can be categorized as a block cipher or a stream cipher, respectively. The RC5 algorithm is a symmetric block cipher known for its simplicity and effectiveness in converting plaintext to ciphertext and vice versa. It offers flexible options for adjusting block size, key size, and the number of encryption rounds. The RC5 algorithm employs operations such as modulo addition, left rotation, modulo subtraction, right rotation, and XOR in its encryption and decryption processes.
 
-## Interface details
-
-### RC5 encryption algorithm
-
-### Inputs:
-•	**clock (1-bit)** : A single-bit input clock that drives the Finite State Machine executing the encryption algorithm. The clock typically has a 50:50 duty cycle.\
-•	**reset (1-bit)**: A control signal that resets the internal states of the encryption system. Synchronous reset has been used in this encryption module.\
-•	**enc_start (1-bit)**: This is a 1-bit control signal which initiates the encryption process when it holds a logic HIGH\
-•	**p (2w-bits)[15:0]** : This is the plain text input for RC5 encryption, generally available in data widths of 16-bit, 32-bit, 64-bit, or 128-bits. Plaintext is processed in two segments of 'w' bits each, aligning with the algorithm’s requirements. For this implementation w = 8
-
-### Output:
-•	**c (2w-bits)**: The output from the RC5 encryption algorithm. Like plaintext, ciphertext typically matches the input data width '2w'. When not in reset mode, the ciphertext is generated from the plaintext after a series of specific logical and arithmetic operations, dependent on the number of rounds 'r'.\
-•   **enc_done (1-bit)**: This output marks the end of encryption and indicates the presence of stable cipher-text output 
-
-
 ## Functionality
 
 ### RC5 Encryption algorithm
@@ -49,26 +34,6 @@ At the beginning of encryption, the MSB w-bits of plaintext is assumed as A and 
 
 When the reset is LOW, state should be initialized to 3'b000 and enc_done has to be maintained at zero. The FSM orchestrates the encryption process, guiding the data through initial setup, S-box key generation, data transformation, and final output stages.
 
-#### Detailed Analysis of the FSM Stages
-
-1. Initial Addition (3'b000)
-
-&nbsp;&nbsp;&nbsp;&nbsp; The S-box keys to be used have to be initialised at the beginning of the design as follows\
-	assign s[0] = 8'h20;\
-	assign s[1] = 8'h10;\
-	assign s[2] = 8'hFF;\
-	assign s[3] = 8'hFF;\
-	The module performs initial modulo additions on the most significant and least significant halves of p_tmp, demonstrating the use of RC5's key mixing in the early stages.
-
-2. Computation States (3'b001 and 3'b010)
-
-&nbsp;&nbsp;&nbsp;&nbsp; These states handle the core of the RC5 encryption's mixing and data transformation, involving complex operations such as XORing, shifting, and modulo operations. State 3'b001 should handle MSB 8-bits computation wherein state 3'b010 should compute the LSB 8-bits. 
-
-3. Final Assignment (3'b011)
-
-&nbsp;&nbsp;&nbsp;&nbsp; The final encrypted data is assigned to the output c, and enc_done is set high, signaling the completion of the encryption process.
-
-
 ## Working example 
 
 ### RC5 Encryption
@@ -90,3 +55,57 @@ B = (8'hFF + 8'h10) mod 256 = 0F
 
 The ciphertext output is C = 16'h0703
 
+### Partial RTL code
+
+```verilog
+module rc5_enc_16bit(input clock,//Positive edge-triggered clock
+                     input reset,//Asynchronous active low reset
+					 input enc_start, //When HIGH, encryption begins
+					 input [15:0]p, //Plaintext input
+					 output reg [15:0]c, //Ciphertext output
+					 output reg enc_done); //When HIGH, indicates the stable ciphertext output
+	//Insert internal signal declarations
+	
+    always_ff @(posedge clock)
+	begin
+		if (!reset)
+		begin
+			state <= 3'b000;
+			p_tmp <= p;
+			enc_done <= 1'b0;
+		end
+		else
+		begin
+			if (enc_start == 1'b1)//If enc_start is HIGH, the encryption process begins
+			begin
+				case (state)
+				3'b000:	begin //Initial addition stage
+						p_tmp[15:8] <= (p_tmp[15:8] + s[0]) % 9'h100;
+						p_tmp[7:0] <= (p_tmp[7:0] + s[1]) % 9'h100;
+						state <= 3'b001;
+						end
+				3'b001:	begin // Computation of MSB 8-bits
+                        //Insert code section here
+						end
+				3'b010:	begin //Computation of LSB 8-bits
+                        //Insert code section here
+						end
+				3'b011:	begin //Final encrypted 16-bit value
+                        //Insert code section here
+						end        
+				default:c <= 16'd0;
+				endcase
+			end
+		end
+	end
+	
+	//Insert assertion to check if final encrypted value appears during state 3'b011
+	
+	//Insert assertion to check if the encrypted value appears at fourth clock cycle after enc_start is HIGH
+	
+	//Insert assertion to check if the enc_done is HIGH at fourth clock cycle after enc_start is HIGH
+	
+	//Insert assertion to check if c value is zero when the reset is at active LOW
+	
+endmodule
+```
