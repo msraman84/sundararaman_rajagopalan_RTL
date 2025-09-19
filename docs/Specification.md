@@ -66,9 +66,46 @@ module rc5_enc_16bit(input clock,//Positive edge-triggered clock
 					 output reg enc_done); //When HIGH, indicates the stable ciphertext output
 	//Insert internal signal declarations
 	
-	//Insert Key generation based on cellular automata
+    always_ff @(posedge clock)
+	begin
+		if (!reset)
+		begin
+			state <= 3'b000;
+			p_tmp <= p;
+			enc_done <= 1'b0;
+		end
+		else
+		begin
+			if (enc_start == 1'b1)//If enc_start is HIGH, the encryption process begins
+			begin
+				case (state)
+				3'b000:	begin //Initial addition stage
+						p_tmp[15:8] <= (p_tmp[15:8] + s[0]) % 9'h100;
+						p_tmp[7:0] <= (p_tmp[7:0] + s[1]) % 9'h100;
+						state <= 3'b001;
+						end
+				3'b001:	begin // Computation of MSB 8-bits
+                        //Insert code section here
+						end
+				3'b010:	begin //Computation of LSB 8-bits
+                        //Insert code section here
+						end
+				3'b011:	begin //Final encrypted 16-bit value
+                        //Insert code section here
+						end        
+				default:c <= 16'd0;
+				endcase
+			end
+		end
+	end
 	
-	//Insert FSM to handle two rounds of encryption
+	//Insert assertion to check if final encrypted value appears during state 3'b011
+	
+	//Insert assertion to check if the encrypted value appears at fourth clock cycle after enc_start is HIGH
+	
+	//Insert assertion to check if the enc_done is HIGH at fourth clock cycle after enc_start is HIGH
+	
+	//Insert assertion to check if c value is zero when the reset is at active LOW
 	
 endmodule
 ```
