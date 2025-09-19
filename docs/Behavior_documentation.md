@@ -14,61 +14,62 @@ VCD warning: /code/verif/tb_rc5_enc.sv:42: $dumpfile called after $dumpvars star
                   30enc_start =  1, enc_p = ffff enc_c = xxxx enc_done = 0
                   40enc_start =  1, enc_p = ffff enc_c = xxxx enc_done = 0
                   50enc_start =  1, enc_p = ffff enc_c = xxxx enc_done = 0
-                  55enc_start =  1, enc_p = ffff enc_c = xxe2 enc_done = 1
+                  55enc_start =  1, enc_p = ffff enc_c = 0f0f enc_done = 1
 Ciphertext is not correct
-                  60enc_start =  1, enc_p = ffff enc_c = xxe2 enc_done = 1
+                  60enc_start =  1, enc_p = ffff enc_c = 0f0f enc_done = 1
 Ciphertext is not correct
-                  70enc_start =  1, enc_p = ffff enc_c = xxe2 enc_done = 1
+                  70enc_start =  1, enc_p = ffff enc_c = 0f0f enc_done = 1
 Ciphertext is not correct
-                  80enc_start =  1, enc_p = ffff enc_c = xxe2 enc_done = 1
-                  85enc_start =  1, enc_p = ff00 enc_c = xxe2 enc_done = 0
-                  90enc_start =  1, enc_p = ff00 enc_c = xxe2 enc_done = 0
-                 100enc_start =  1, enc_p = ff00 enc_c = xxe2 enc_done = 0
-                 110enc_start =  1, enc_p = ff00 enc_c = xxe2 enc_done = 0
-                 120enc_start =  1, enc_p = ff00 enc_c = xxe2 enc_done = 0
-                 130enc_start =  1, enc_p = ff00 enc_c = xxe2 enc_done = 0
-                 135enc_start =  1, enc_p = ff00 enc_c = xx8e enc_done = 1
+                  80enc_start =  1, enc_p = ffff enc_c = 0f0f enc_done = 1
+                  85enc_start =  1, enc_p = ff00 enc_c = 0f0f enc_done = 0
+                  90enc_start =  1, enc_p = ff00 enc_c = 0f0f enc_done = 0
+                 100enc_start =  1, enc_p = ff00 enc_c = 0f0f enc_done = 0
+                 110enc_start =  1, enc_p = ff00 enc_c = 0f0f enc_done = 0
+                 120enc_start =  1, enc_p = ff00 enc_c = 0f0f enc_done = 0
+                 130enc_start =  1, enc_p = ff00 enc_c = 0f0f enc_done = 0
+                 135enc_start =  1, enc_p = ff00 enc_c = 0e07 enc_done = 1
 Ciphertext is not correct
-                 140enc_start =  1, enc_p = ff00 enc_c = xx8e enc_done = 1
+                 140enc_start =  1, enc_p = ff00 enc_c = 0e07 enc_done = 1
 Ciphertext is not correct
-                 150enc_start =  1, enc_p = ff00 enc_c = xx8e enc_done = 1
+                 150enc_start =  1, enc_p = ff00 enc_c = 0e07 enc_done = 1
 Ciphertext is not correct
-                 160enc_start =  1, enc_p = ff00 enc_c = xx8e enc_done = 1
+                 160enc_start =  1, enc_p = ff00 enc_c = 0e07 enc_done = 1
 Ciphertext is not correct
-                 170enc_start =  1, enc_p = 00ff enc_c = xx8e enc_done = 1
-                 175enc_start =  1, enc_p = 00ff enc_c = xx8e enc_done = 0
-                 180enc_start =  1, enc_p = 00ff enc_c = xx8e enc_done = 0
-                 190enc_start =  1, enc_p = 00ff enc_c = xx8e enc_done = 0
-                 200enc_start =  1, enc_p = 00ff enc_c = xx8e enc_done = 0
-                 210enc_start =  1, enc_p = 00ff enc_c = xx8e enc_done = 0
-                 220enc_start =  1, enc_p = 00ff enc_c = xx8e enc_done = 0
-                 225enc_start =  1, enc_p = 00ff enc_c = xxfe enc_done = 1
+                 170enc_start =  1, enc_p = 00ff enc_c = 0e07 enc_done = 1
+                 175enc_start =  1, enc_p = 00ff enc_c = 0e07 enc_done = 0
+                 180enc_start =  1, enc_p = 00ff enc_c = 0e07 enc_done = 0
+                 190enc_start =  1, enc_p = 00ff enc_c = 0e07 enc_done = 0
+                 200enc_start =  1, enc_p = 00ff enc_c = 0e07 enc_done = 0
+                 210enc_start =  1, enc_p = 00ff enc_c = 0e07 enc_done = 0
+                 220enc_start =  1, enc_p = 00ff enc_c = 0e07 enc_done = 0
+                 225enc_start =  1, enc_p = 00ff enc_c = 0806 enc_done = 1
 Ciphertext is not correct
-                 230enc_start =  1, enc_p = 00ff enc_c = xxfe enc_done = 1
+                 230enc_start =  1, enc_p = 00ff enc_c = 0806 enc_done = 1
 Ciphertext is not correct
-                 240enc_start =  1, enc_p = 00ff enc_c = xxfe enc_done = 1
+                 240enc_start =  1, enc_p = 00ff enc_c = 0806 enc_done = 1
 Ciphertext is not correct
-                 250enc_start =  1, enc_p = 00ff enc_c = xxfe enc_done = 1
+                 250enc_start =  1, enc_p = 00ff enc_c = 0806 enc_done = 1
 Ciphertext is not correct
-                 260enc_start =  1, enc_p = 00ff enc_c = xxfe enc_done = 1
-                 265enc_start =  1, enc_p = 00ff enc_c = xxfe enc_done = 0
-                 270enc_start =  1, enc_p = 00ff enc_c = xxfe enc_done = 0
-                 280enc_start =  1, enc_p = 00ff enc_c = xxfe enc_done = 0
-                 290enc_start =  1, enc_p = 00ff enc_c = xxfe enc_done = 0
+                 260enc_start =  1, enc_p = 00ff enc_c = 0806 enc_done = 1
+                 265enc_start =  1, enc_p = 00ff enc_c = 0806 enc_done = 0
+                 270enc_start =  1, enc_p = 00ff enc_c = 0806 enc_done = 0
+                 280enc_start =  1, enc_p = 00ff enc_c = 0806 enc_done = 0
+                 290enc_start =  1, enc_p = 00ff enc_c = 0806 enc_done = 0
 /code/verif/tb_rc5_enc.sv:62: $finish called at 300 (1s)
-                 300enc_start =  1, enc_p = 00ff enc_c = xxfe enc_done = 0
+                 300enc_start =  1, enc_p = 00ff enc_c = 0806 enc_done = 0
 ```
+
 Based on the functionality of RC5 encryption algorithm, the expected and actual outputs are given below:
 
 | Plaintext (p) | Expected Ciphertext (c) | Actual Ciphertext (c) |
 
 |---------------|--------------------------|------------------------|
 
-| FFFF          | 0703                     | xxE2                   |
+| FFFF          | 0703                     | 0F0F                   |
 
-| FF00          | 0E86                     | xx8E                   |
+| FF00          | 0E86                     | 0E07                   |
 
-| 00FF          | 9665                     | xxFE                   |
+| 00FF          | 9665                     | 0806                   |
 
 
 Identify the bug(s) in the RTL code and fix them.
