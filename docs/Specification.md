@@ -1,4 +1,4 @@
-# RC5 Documentation of the systemverilog rtl file **rc5_enc_dec_param.sv**
+# RC5 Documentation of the systemverilog RTL file **rc5_enc_dec_param.sv**
 
 ## Overview
 
