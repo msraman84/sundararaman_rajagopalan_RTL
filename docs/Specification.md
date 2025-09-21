@@ -58,7 +58,7 @@ At the beginning of encryption, the MSB w-bits of plaintext is assumed as A and 
 
 ### Key generation for encryption
 
-Fibonacci configuration of 8-bit LFSR has to be utilized in this RTL design for generating s-box keys. It has been designed with a characteristic primitive polynomial of x<sup>8</sup>+x<sup>6</sup>+x <sup>5</sup>+x+1.Three XOR gates and 8 D Flip-Flops are required to construct this 8-bit LFSR. When the reset is at active HIGH, the LFSR Flip-Flops will be initialized with the bits of the 8-bit initial seed (lfsr_seed_enc). When the reset is at active LOW and during the positive edge of the clock, the 8-bit random sequence generation begins.
+Fibonacci configuration of 8-bit LFSR has to be utilized in this RTL design for generating s-box keys. It has been designed with a characteristic primitive polynomial of x<sup>8</sup>+x<sup>6</sup>+x <sup>5</sup>+x+1.Three XOR gates and 8 D Flip-Flops are required to construct this 8-bit LFSR. When the reset is at active LOW, the LFSR Flip-Flops will be initialized with the bits of the 8-bit initial seed (lfsr_seed_enc). When the reset is at active HIGH and during the positive edge of the clock, the 8-bit random sequence generation begins.
 
 ### FSM-Controlled Process 
 
@@ -80,7 +80,7 @@ When the reset is LOW, state_enc should be initialized to 3'b000 and enc_done ha
 
 4. Final Assignment (3'b100)
 
-&nbsp;&nbsp;&nbsp;&nbsp; The final encrypted data is assigned to the output c, and enc_done is set HIGH after the last 8-bit S-box key value mod 4 clock cycles, signaling the completion of the encryption process.
+&nbsp;&nbsp;&nbsp;&nbsp; The final encrypted data is assigned to the output c, and enc_done is set HIGH, signaling the completion of the encryption process.
 
 ### RC5 Decryption algorithm
 
@@ -114,7 +114,7 @@ The FSM orchestrates the decryption process, guiding the data through initial se
 
 ### Key generation for decryption
 
-Fibonacci configuration of 8-bit LFSR has to be utilized in this RTL design for generating s-box keys. It has been designed with a characteristic primitive polynomial of x<sup>8</sup>+x<sup>6</sup>+x <sup>5</sup>+x+1.Three XOR gates and 8 D Flip-Flops are required to construct this 8-bit LFSR. When the reset is at active HIGH, the LFSR Flip-Flops will be initialized with the bits of the 8-bit initial seed (lfsr_seed_dec). When the reset is at active LOW and during the positive edge of the clock, the 8-bit random sequence generation begins.
+Fibonacci configuration of 8-bit LFSR has to be utilized in this RTL design for generating s-box keys. It has been designed with a characteristic primitive polynomial of x<sup>8</sup>+x<sup>6</sup>+x <sup>5</sup>+x+1.Three XOR gates and 8 D Flip-Flops are required to construct this 8-bit LFSR. When the reset is at active LOW, the LFSR Flip-Flops will be initialized with the bits of the 8-bit initial seed (lfsr_seed_dec). When the reset is at active HIGH and during the positive edge of the clock, the 8-bit random sequence generation begins.
 
 ### Detailed Analysis of the FSM Stages
 
@@ -128,7 +128,7 @@ Fibonacci configuration of 8-bit LFSR has to be utilized in this RTL design for 
 
 3. Final Output and Reset (3'b100 to 3'b110)
 
-&nbsp;&nbsp;&nbsp;&nbsp; The final states manage the loopback for multiple rounds and ultimately move the processed data into the output register once all rounds are complete. The final decrypted data is assigned to the output p, and dec_done is set HIGH after the last 8-bit S-box key value mod 5 clock cycles, signaling the completion of the decryption process.
+&nbsp;&nbsp;&nbsp;&nbsp; The final states manage the loopback for multiple rounds and ultimately move the processed data into the output register once all rounds are complete. The final decrypted data is assigned to the output p, and dec_done is set HIGH, signaling the completion of the decryption process.
 
 
 ## Working example 
