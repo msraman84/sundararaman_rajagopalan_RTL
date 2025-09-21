@@ -6,7 +6,7 @@
    make WAVES=1
 #### 5. Waveform can be viewed with the following command
    gtkwave sim_build/rc5_enc_dec_param.fst
-#### 6. Sample harness testbench output for make WAVES=1
+### 6. Sample harness testbench output for make WAVES=1
 rm -f results.xml
 "make" -f Makefile results.xml
 make[1]: Entering directory '/e/Phinity_labs/sundararaman_rajagopalan_RTL/harness'
