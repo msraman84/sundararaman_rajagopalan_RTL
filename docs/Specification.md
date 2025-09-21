@@ -32,7 +32,14 @@ At the beginning of encryption, the MSB w-bits of plaintext is assumed as A and 
 
 ### FSM-Controlled Process 
 
-When the reset is LOW, state should be initialized to 3'b000 and enc_done has to be maintained at zero. The FSM orchestrates the encryption process, guiding the data through initial setup, S-box key generation, data transformation, and final output stages.
+When the reset is LOW, state should be initialized to 3'b000 and enc_done has to be maintained at zero. The FSM orchestrates the encryption process, guiding the data through initial setup, S-box key generation, data transformation, and final output stages when reset is HIGH.
+
+### Key generation
+
+- The key generation has to be accomplished with 8-bit Cellular Automata (CA) based on rules 90 and 150
+- A total of 6 8-bit keys have to be generated with the rule combination R90-R90-R150-R90-R150-R90-R150-R90
+- When reset is LOW, the seed of CA has to be initialised to 8'hFF
+- First state of statemachine should generate the required 8-bit keys for two rounds of RC5 encryption
 
 ## Working example 
 
