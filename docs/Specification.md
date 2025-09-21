@@ -66,13 +66,14 @@ module rc5_enc_16bit(input clock,//Positive edge-triggered clock
 					 output reg enc_done); //When HIGH, indicates the stable ciphertext output
 	//Insert internal signal declarations
 	
-    always_ff @(posedge clock)
+    always_ff @(posedge clock or negedge reset)
 	begin
 		if (!reset)
 		begin
 			state <= 3'b000;
 			p_tmp <= p;
 			enc_done <= 1'b0;
+            c <= 'd0;
 		end
 		else
 		begin
