@@ -8,7 +8,6 @@ SIM ?= icarus
 TOPLEVEL_LANG ?= verilog
 RTL_DIR ?= ../rtl
 
-#VERILOG_SOURCES = $(RTL_DIR)/rc5_enc_dec_param.sv
 VERILOG_INCLUDE_DIRS = $(RTL_DIR)
 
 VERILOG_SOURCES += ../rtl/rc5_enc_dec_param.sv
