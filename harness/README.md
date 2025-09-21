@@ -1,4 +1,4 @@
-### 1. To execute the harness, MAKEFILE and python cocotb testbench (test_rc5_enc_dec_param.py) are needed
+#### 1. To execute the harness, MAKEFILE and python cocotb testbench (test_rc5_enc_dec_param.py) are needed
 ### 2. The rtl (.sv) files will be interfaced with the cocotb testbench through the MAKEFILE 
 ### 3. To run the cocotb testbench without dump file generation (.fst) for waveform view, execute the following command in Anaconda prompt:
    make
