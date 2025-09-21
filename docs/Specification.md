@@ -17,9 +17,9 @@ Cryptography is the science of securing multimedia objects such as text, images,
 •	**clock (1-bit)** : A single-bit input clock that drives the Finite State Machine executing the encryption algorithm. The clock typically has a 50:50 duty cycle.\
 •	**reset (1-bit)**: A control signal that resets the internal states of the encryption system. Asynchronous active LOW reset has been used in this encryption module\
 •	**enc_start (1-bit)**: This is a 1-bit control signal which initiates the encryption process when it holds a logic HIGH\
-•	**p_in (w-bits)[w-1:0]** : This is the plain text input for RC5 encryption, generally available in data widths of 16-bit, 32-bit, 64-bit, or 128-bits. Plaintext is processed in two segments of 'w' bits each, aligning with the algorithm’s requirements.\
+•	**p_in (w-bits)[w-1:0]** : This is the plain text input for RC5 encryption, generally available in data widths of 16-bit, 32-bit, 64-bit, or 128-bits. Plaintext is processed in two segments of 'w/2' bits each, aligning with the algorithm’s requirements.\
 •	**dec_start (1-bit)**: This is a 1-bit control signal which initiates the decryption process when it holds a logic HIGH\
-•	**c_in (w-bits)[w-1:0]** : This is the cipher text input for RC5 decryption, generally available in data widths of 16-bit, 32-bit, 64-bit, or 128-bits. Ciphertext is processed in two segments of 'w' bits each, aligning with the algorithm’s requirements.\
+•	**c_in (w-bits)[w-1:0]** : This is the cipher text input for RC5 decryption, generally available in data widths of 16-bit, 32-bit, 64-bit, or 128-bits. Ciphertext is processed in two segments of 'w/2' bits each, aligning with the algorithm’s requirements.\
 •	**lfsr_seed_enc (8-bits)**: This is an 8-bit seed to be applied to LFSR for the generation of 8-bit keys to be used as S-box keys for encryption process\
 •	**lfsr_seed_dec (8-bits)**: This is an 8-bit seed to be applied to LFSR for the generation of 8-bit keys to be used as S-box keys for decryption process
 
