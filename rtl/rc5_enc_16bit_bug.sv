@@ -1,9 +1,10 @@
-module rc5_enc_16bit(input clock,
-                     input reset,
-					 input enc_start, 
-					 input [15:0]p, 
-					 output reg [15:0]c, 
-					 output reg enc_done);
+module rc5_enc_16bit_bug(input clock,
+                         input reset,
+					     input enc_start, 
+				    	 input [15:0]p, 
+					     output reg [15:0]c, 
+					     output reg enc_done
+						 );
 	logic [7:0]s[0:3];
 	reg [15:0] p_tmp;//Internal signal to handle encryption operation 
 	reg [2:0] state;//State representation to manage operations of encryption algorithm FSM
