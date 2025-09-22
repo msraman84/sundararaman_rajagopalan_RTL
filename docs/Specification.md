@@ -62,6 +62,8 @@ B = (8'hFF + 8'h10) mod 256 = 0F
 
 The ciphertext output is C = 16'h0703
 
+Complete the given partial systemverilog RTL code based on the above specification. The RTL code should be synthesizable.
+
 ### Partial RTL code
 
 ```verilog
