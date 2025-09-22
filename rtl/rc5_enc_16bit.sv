@@ -1,4 +1,4 @@
-module rc5_enc_16bit_bug(input clock,
+module rc5_enc_16bit(input clock,
                      input reset,
 					 input enc_start, 
 					 input [15:0]p, 
@@ -30,15 +30,15 @@ module rc5_enc_16bit_bug(input clock,
 						state <= 3'b001;
 						end
 				3'b001:	begin 
-						p_tmp[15:8] <= ((((p_tmp[15:8] & p_tmp[7:0]) << (p_tmp[7:0]%8)) | ((p_tmp[15:8] & p_tmp[7:0]) >> (8 - (p_tmp[7:0]%8)))) + s[2]) % 9'h100;
+						p_tmp[15:8] <= ((((p_tmp[15:8] ^ p_tmp[7:0]) << (p_tmp[7:0]%8)) | ((p_tmp[15:8] ^ p_tmp[7:0]) >> (8 - (p_tmp[7:0]%8)))) + s[2]) % 9'h100;
 						state <= 3'b010;
 						end
 				3'b010:	begin 
-						p_tmp[7:0] <= ((((p_tmp[7:0] | p_tmp[15:8]) << (p_tmp[15:8]%8)) | ((p_tmp[7:0] | p_tmp[15:8]) >> (8 - (p_tmp[15:8]%8)))) + s[3]) % 9'h100;
+						p_tmp[7:0] <= ((((p_tmp[7:0] ^ p_tmp[15:8]) << (p_tmp[15:8]%8)) | ((p_tmp[7:0] ^ p_tmp[15:8]) >> (8 - (p_tmp[15:8]%8)))) + s[3]) % 9'h100;
 						state <= 3'b011;
 						end
 				3'b011:	begin 
-						c[7:0] <= p_tmp [7:0];
+						c[15:0] <= p_tmp [15:0];
 						enc_done <= 1'b1;
 						end        
 				default:c <= 16'd0;
