@@ -15,7 +15,7 @@ Cryptography is the science of securing multimedia objects such as text, images,
 
 ### Inputs:
 •	**clock (1-bit)** : A single-bit input clock that drives the Finite State Machine executing the encryption algorithm. The clock typically has a 50:50 duty cycle.\
-•	**reset (1-bit)**: A control signal that resets the internal states of the encryption system. Asynchronous active LOW reset has been used in this encryption module\
+•	**reset (1-bit)**: A control signal that resets the internal states of the encryption system. Asynchronous active LOW reset has been used for both encryption and decryption modules\
 •	**enc_start (1-bit)**: This is a 1-bit control signal which initiates the encryption process when it holds a logic HIGH\
 •	**p_in (w-bits)[w-1:0]** : This is the plain text input for RC5 encryption, generally available in data widths of 16-bit, 32-bit, 64-bit, or 128-bits. Plaintext is processed in two segments of 'w/2' bits each, aligning with the algorithm’s requirements.\
 •	**dec_start (1-bit)**: This is a 1-bit control signal which initiates the decryption process when it holds a logic HIGH\
@@ -172,4 +172,6 @@ A = 8'h1F - 8'h20 = 8'hFF
 
 Thus, the recovered plaintext is P = 16'hFFFF
 
-
+Considering the above documentation for RC5 encryption/decryption processes, develop systemverilog RTL code with module name `rc5_enc_dec_param`. Consider the following aspects while developing the RTL.
+- The `lfsr_8bit` RTL module should be instantiated in `rc5_enc_dec_param` module for key generation
+- All the RTL modules should be synthesizable
