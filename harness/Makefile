@@ -7,7 +7,6 @@
 SIM ?= icarus
 TOPLEVEL_LANG ?= verilog
 
-#VERILOG_SOURCES += $(PWD)/rc5_enc_dec_param.sv
 VERILOG_SOURCES += ../rtl/rc5_enc_16bit.sv 
 # use VHDL_SOURCES for VHDL files
 
