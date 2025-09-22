@@ -71,4 +71,4 @@ Based on the functionality of RC5 encryption algorithm, the expected and actual 
 | 00FF          | 9665                     | xxFE                   |
 
 
-Identify the bug(s) in the RTL code and fix them.
+Identify the bug(s) in the RTL code and fix them. Name the corrected RTL as `rc5_enc_16bit.sv`
