@@ -55,6 +55,8 @@ B = (8'hFF + 8'h10) mod 256 = 0F
 
 The ciphertext output is C = 16'h0703
 
+Based on the given functionality, complete the given partial systemverilog code by adding appropriate missing sections and assertions. Use the 8-bit S-box keys mentioned in the working example for implementation.
+
 ### Partial RTL code
 
 ```verilog
@@ -66,13 +68,14 @@ module rc5_enc_16bit(input clock,//Positive edge-triggered clock
 					 output reg enc_done); //When HIGH, indicates the stable ciphertext output
 	//Insert internal signal declarations
 	
-    always_ff @(posedge clock)
+    always_ff @(posedge clock or negedge reset)
 	begin
 		if (!reset)
 		begin
 			state <= 3'b000;
 			p_tmp <= p;
 			enc_done <= 1'b0;
+            c <= 'd0;
 		end
 		else
 		begin
