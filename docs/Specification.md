@@ -55,7 +55,7 @@ B = (8'hFF + 8'h10) mod 256 = 0F
 
 The ciphertext output is C = 16'h0703
 
-Based on the given functionality, complete the given partial systemverilog code by adding appropriate missing sections and assertions.
+Based on the given functionality, complete the given partial systemverilog code by adding appropriate missing sections and assertions. Use the 8-bit S-box keys mentioned in the working example for implementation.
 
 ### Partial RTL code
 
