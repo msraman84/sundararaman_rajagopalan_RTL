@@ -90,4 +90,4 @@ B = (8'hFF + 8'h10) mod 256 = 0F
 
 The ciphertext output is C = 16'h0703
 
-Considering the above specification, develop a comprehension of the testbench of this RTL available in `/code/verif/tb_rc5_enc.sv` file. The documentation should detail the steps followed in the testbench to verify the functionality of the RC5 encryption module.
+Considering the above specification, develop a comprehension of the testbench of this RTL available in `/code/verif/tb_rc5_enc.sv` file. The documentation file `/code/docs/tb_documentation.md` should detail the steps followed in the testbench to verify the functionality of the RC5 encryption module.
