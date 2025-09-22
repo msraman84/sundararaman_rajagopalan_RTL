@@ -1,7 +1,7 @@
 module tb_rc5_enc();
   
 	//Parameter to declare number of tests
-	parameter test_num = 700;
+	parameter test_num = 300;
 	
 	reg clk,rst;
 	logic [15:0] enc_c;
@@ -28,26 +28,16 @@ module tb_rc5_enc();
 		end
 	end
 
-	initial begin 
-	    //Test 1
-		rst = 1'b0;enc_start <= 1'b1; enc_p <= 16'h1000;
+	initial begin //Test cases 
+		rst = 1'b0;enc_start <= 1'b1; enc_p <= 16'hFFFF;//Test 1
 		#15 rst <= 1'b1; 
-		#150 rst = 1'b0;
-		
-		//Test 2
-		rst = 1'b0;enc_start <= 1'b1; enc_p <= 16'hFFFF;
+		#70 rst <= 1'b0;
+		rst = 1'b0;enc_start <= 1'b1; enc_p <= 16'hFF00;//Test 2
 		#15 rst <= 1'b1; 
-		#150 rst = 1'b0;
-		
-	    //Test 3
-		rst = 1'b0;enc_start <= 1'b1; enc_p <= 16'h00FF;
+		#70 rst <= 1'b0;
+		rst = 1'b0;enc_start <= 1'b1; enc_p <= 16'h00FF;//Test 3
 		#15 rst <= 1'b1; 
-		#150 rst = 1'b0;
-		
-		//Test 4
-		rst = 1'b0;enc_start <= 1'b1; enc_p <= 16'hFF00;
-		#15 rst <= 1'b1; 
-		#150 rst = 1'b0;
+		#70 rst <= 1'b0;
 	end
 
 	initial begin
@@ -55,9 +45,20 @@ module tb_rc5_enc();
 		$dumpfile("dump.vcd");
 	end  
 
-	//Monitor to display the stimulus output of DUT
-	always@(posedge clk)
-		$monitor($time,"enc_start =  %d, enc_p = %x enc_c = %x enc_done = %d",enc_start,enc_p,enc_c,enc_done);
+    //Monitor to display the stimulus output of DUT
+	always@(negedge clk) begin
+		$monitor($time,"enc_start =  %d, enc_p = %h enc_c = %h enc_done = %d",enc_start,enc_p,enc_c,enc_done);
+        if (enc_done == 1'b1) begin
+		    if ((enc_p == 16'hFFFF) && (enc_c == 16'h0703))
+			    $display("Ciphertext is correct");
+		    else if ((enc_p == 16'hFF00) && (enc_c == 16'h0E86))
+			    $display("Ciphertext is correct");
+		    else if ((enc_p == 16'h00FF) && (enc_c == 16'h9665))
+			    $display("Ciphertext is correct");
+		    else
+			    $display("Ciphertext is not correct");
+		end
+	end
 
 	//TB run time based on number of tests to be executed
 	initial begin
