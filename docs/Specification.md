@@ -90,4 +90,4 @@ B = (8'hFF + 8'h10) mod 256 = 0F
 
 The ciphertext output is C = 16'h0703
 
-Considering the above specification and the testbench of this RTL available in `/code/verif/tb_rc5_enc.sv` file, identify the code section from the TB that ensures whether the RTL's response is correct for the input stimulus of `p=0xFFFF`. The documentation file `/code/docs/tb_documentation.md` should contain the code snippet and the comprehension.
+Considering the above specification and the testbench of this RTL available in `/code/verif/tb_rc5_enc.sv` file, identify the code section from the TB that ensures whether the RTL's response is correct for the input stimulus of `p=0xFFFF`. The documentation file `/code/docs/tb_comprehension.md` should contain the code snippet and the comprehension.
