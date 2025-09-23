@@ -1,4 +1,4 @@
-Following code snippet of `tb_rc5_enc.sv` checks the RTL response for `p=0xFFFF`:\
+Following code snippet of `tb_rc5_enc.sv` checks the RTL response for `p=0xFFFF`:
 ```
 if ((enc_p == 16'hFFFF) && (enc_c == 16'h0703))
     $display("Ciphertext is correct");
