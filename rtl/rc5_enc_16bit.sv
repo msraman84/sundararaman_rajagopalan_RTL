@@ -1,4 +1,10 @@
-module rc5_enc_16bit(input clock,reset,enc_start, input [15:0]p, output reg [15:0]c, output reg enc_done);
+module rc5_enc_16bit(input clock,
+					 input reset,
+					 input enc_start, 
+					 input [15:0]p, 
+					 output reg [15:0]c, 
+					 output reg enc_done
+	                 );
 	//enc_start - HIGH to start the encryption; p - 16-bit plaintext input ; 
 	//c - 16-bit cipher text output ; enc_done - Encryption output availability indicator
 	logic [7:0]s[0:3];
