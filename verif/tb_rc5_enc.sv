@@ -25,7 +25,7 @@ module tb_rc5_enc();
 		end
 	end
 
-	initial begin //Initial Reset 
+	initial begin 
 	
 	    //All zeros tests
 		rst = 1'b0;enc_start <= 1'b1; enc_p <= 16'h0000;//Test 1
@@ -57,25 +57,26 @@ module tb_rc5_enc();
 		#15 rst <= 1'b1; 
 		#70 rst <= 1'b0;
 		
-		//Random#1 test
-		rst = 1'b0;enc_start <= 1'b1; enc_p <= $urandom_range(0,65535);//Test 7
+		//Random value#1 test
+		rst = 1'b0;enc_start <= 1'b1; enc_p <= 16'h1234;//Test 7
 		#15 rst <= 1'b1; 
 		#70 rst <= 1'b0;
 		
-		//Random#2 test
-		rst = 1'b0;enc_start <= 1'b1; enc_p <= $urandom_range(0,65535);//Test 8
+		//Random value#2 test
+		rst = 1'b0;enc_start <= 1'b1; enc_p <= 16'h4321;//Test 8
 		#15 rst <= 1'b1; 
 		#70 rst <= 1'b0;
 		
-		//Random#3 test
-		rst = 1'b0;enc_start <= 1'b1; enc_p <= $urandom_range(0,65535);//Test 9
+		//Random value#3 test
+		rst = 1'b0;enc_start <= 1'b1; enc_p <= 16'h567A;//Test 9
 		#15 rst <= 1'b1; 
 		#70 rst <= 1'b0;
 		
 		//Check if new plaintext value is taken only if rst = 0
 		rst = 1'b0;enc_start <= 1'b1; enc_p <= 16'hFFFF;//Test 10
 		#15 rst <= 1'b1; 
-		#30 enc_p <= 16'h0000;
+		#20 enc_p <= 16'h0000;
+		assert (enc_p == 16'hFFFF);
 		#50 rst <= 1'b0;
 
 	end
@@ -87,16 +88,28 @@ module tb_rc5_enc();
 
 	//Monitor to display the stimulus output of DUT
 	always@(negedge clk) begin
-		$monitor($time,"enc_start =  %d, enc_p = %h enc_c = %h enc_done = %d",enc_start,enc_p,enc_c,enc_done);
+		$monitor($time,"reset = %b,enc_start =  %d, enc_p = %h enc_c = %h enc_done = %d",rst,enc_start,enc_p,enc_c,enc_done);
         if (enc_done == 1'b1) begin
-		    if ((enc_p == 16'hFFFF) && (enc_c == 16'h0703))
+		    if ((enc_p == 16'h0000) && (enc_c == 16'h2F9E))
+			    $display("Ciphertext is correct");
+		    else if ((enc_p == 16'hFFFF) && (enc_c == 16'h0703))
+			    $display("Ciphertext is correct");
+			else if ((enc_p == 16'hAAAA) && (enc_c == 16'hC079))
+			    $display("Ciphertext is correct");
+			else if ((enc_p == 16'h5555) && (enc_c == 16'h01C7))
+			    $display("Ciphertext is correct");
+			else if ((enc_p == 16'h00FF) && (enc_c == 16'h9665))
 			    $display("Ciphertext is correct");
 		    else if ((enc_p == 16'hFF00) && (enc_c == 16'h0E86))
 			    $display("Ciphertext is correct");
-		    else if ((enc_p == 16'h00FF) && (enc_c == 16'h9665))
+            else if ((enc_p == 16'h1234) && (enc_c == 16'h6687))
+			    $display("Ciphertext is correct");
+			else if ((enc_p == 16'h4321) && (enc_c == 16'hA393))
+			    $display("Ciphertext is correct");
+		    else if ((enc_p == 16'h567A) && (enc_c == 16'hF2E0))
 			    $display("Ciphertext is correct");
 		    else
-			    $display("Ciphertext is not correct");
+			    $display("Ciphertext is not correct or new plaintext applied");
 		end
 	end
 	//TB run time based on number of tests to be executed
