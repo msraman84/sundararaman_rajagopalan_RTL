@@ -1,5 +1,5 @@
 Following testbench code snippet of `tb_rc5_enc.sv` checks the DUT response for the plaintext input `p=0xFFFF`:
-```
+```verilog
 if ((enc_p == 16'hFFFF) && (enc_c == 16'h0703))
     $display("Ciphertext is correct");
 ```
