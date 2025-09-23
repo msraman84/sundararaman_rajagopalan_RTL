@@ -1,7 +1,7 @@
 module tb_rc5_enc();
   
 	//Parameter to declare number of tests
-	parameter delay = 300;
+	parameter delay = 900;
 	reg clk,rst;
 	logic [15:0] enc_c;
 	logic [15:0] enc_p;
